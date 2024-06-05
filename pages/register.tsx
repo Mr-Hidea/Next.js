@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Head from 'next/head'; // Import Head component
 
 const Register = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -16,12 +17,15 @@ const Register = () => {
       const res = await axios.post('/api/register', form);
       setMessage(res.data.message);
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Something went wrong');
+      setMessage(error.response.data.message);
     }
   };
 
   return (
     <div>
+      <Head>
+        <title>Register - Ad-vantage</title> {/* Set page title */}
+      </Head>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <input
